@@ -99,17 +99,45 @@ export GEMINI_MODEL='gemini-2.5-pro'
 
 ## Utilizzo
 
+Avvia la chat interattiva:
+
 ```bash
 gemini
 ```
 
-Digita `exit`, `quit` o `esci` per chiudere la sessione.
+### Esempio di sessione interattiva
 
-Puoi anche usare pipe:
+```
+🤖 Gemini (gemini-2.5-flash) — digita 'exit' o 'quit' per uscire
+
+Tu > Ciao!
+Gemini > Ciao! Come posso aiutarti oggi?
+
+Tu > exit
+Ciao!
+```
+
+### Utilizzo con pipe
 
 ```bash
 echo "Qual è la capitale dell'Italia?" | gemini
 ```
+
+Output atteso:
+
+```
+🤖 Gemini (gemini-2.5-flash) — digita 'exit' o 'quit' per uscire
+
+Tu >
+Gemini > La capitale dell'Italia è Roma.
+
+Tu >
+Uscita...
+```
+
+### Lingua
+
+Lo script risponde in italiano di default grazie al prompt di sistema configurato. Puoi comunque scrivere in qualsiasi lingua.
 
 ## Aggiornamento di Python
 
