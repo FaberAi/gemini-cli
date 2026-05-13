@@ -2,6 +2,50 @@
 
 Script interattivo per chattare con Google Gemini direttamente dal terminale.
 
+## Installazione
+
+### 1. Clona il repository
+
+```bash
+git clone https://github.com/FaberAi/gemini-cli.git
+cd gemini-cli
+```
+
+### 2. Installa Python (se non presente)
+
+```bash
+brew install python
+```
+
+### 3. Crea l'ambiente virtuale e installa le dipendenze
+
+```bash
+/opt/homebrew/bin/python3 -m venv ~/.venvs/gemini
+~/.venvs/gemini/bin/pip install google-genai
+```
+
+### 4. Configura la chiave API
+
+Aggiungi al tuo `~/.zshrc`:
+
+```zsh
+export GOOGLE_API_KEY='la_tua_chiave_api'
+```
+
+Ottieni la chiave da [Google AI Studio](https://aistudio.google.com), poi ricarica la configurazione:
+
+```zsh
+source ~/.zshrc
+```
+
+### 5. Aggiungi lo script al PATH (opzionale)
+
+Se vuoi usare `gemini` da qualsiasi directory, sposta o linka lo script in una cartella nel tuo PATH:
+
+```bash
+ln -s "$(pwd)/gemini" ~/bin/gemini
+```
+
 ## Requisiti
 
 - Python 3.14 (installato via Homebrew)
