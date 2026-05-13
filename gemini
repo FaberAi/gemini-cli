@@ -1,0 +1,52 @@
+#!/Users/fabrizio/.venvs/gemini/bin/python3
+import os
+import sys
+
+try:
+    from google import genai
+    from google.genai import types
+except ImportError:
+    print("Errore: il package google-genai non è installato.")
+    print("Esegui: pip3 install google-genai")
+    sys.exit(1)
+
+API_KEY = os.environ.get("GOOGLE_API_KEY", "").strip()
+if not API_KEY:
+    print("Errore: la variabile d'ambiente GOOGLE_API_KEY non è impostata.")
+    print("Ottieni una chiave da https://aistudio.google.com e poi esegui:")
+    print("  export GOOGLE_API_KEY='la_tua_chiave'")
+    sys.exit(1)
+
+MODEL_NAME = os.environ.get("GEMINI_MODEL", "gemini-2.5-flash")
+
+SYSTEM_PROMPT = "Sei un assistente AI utile e conciso. Rispondi in italiano se possibile."
+
+def chat():
+    client = genai.Client(api_key=API_KEY)
+    config = types.GenerateContentConfig(system_instruction=SYSTEM_PROMPT)
+    chat_session = client.chats.create(model=MODEL_NAME, config=config)
+
+    print(f"\n🤖 Gemini ({MODEL_NAME}) — digita 'exit' o 'quit' per uscire\n")
+
+    while True:
+        try:
+            user_input = input("Tu > ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nUscita...")
+            break
+
+        if user_input.lower() in ("exit", "quit", "esci"):
+            print("Ciao!")
+            break
+
+        if not user_input:
+            continue
+
+        try:
+            response = chat_session.send_message(user_input)
+            print(f"\nGemini > {response.text}\n")
+        except Exception as e:
+            print(f"\nErrore: {e}\n")
+
+if __name__ == "__main__":
+    chat()
